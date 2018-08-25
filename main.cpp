@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Pessoa.h"
 #include "Atividade.h"
+#include "Projeto.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ int main()
     cout << pessoa_01->getHorasDiarias() << endl;
     cout << pessoa_01->getCusto(22) << endl;
     pessoa_01->imprimir();
+    cout << "----------------      " << endl;
 
     //Teste para atividades:
     Pessoa *pessoa_02 = new Pessoa("Camila", 25, 4);
@@ -27,9 +29,26 @@ int main()
     cout << atividade_01->getDuracao() << endl;
     cout << atividade_01->getCusto() << endl;
     atividade_01->imprimir();
+    cout << "----------------      " << endl;
 
     //Teste para projeto:
-
+    Projeto *projeto_01 = new Projeto("Teste");
+    Atividade *atividade_02 = new Atividade("Contas", 20);
+    cout << projeto_01->getNome() << endl;
+    cout << projeto_01->adicionar(atividade_01) << endl;
+    cout << projeto_01->adicionar(atividade_01) << endl;
+    cout << projeto_01->adicionar(atividade_02) << endl;
+    cout << projeto_01->getAtividades() << endl;
+    cout << projeto_01->getQuantidadeDeAtividades() << endl;
+    cout << projeto_01->adicionarRecurso(pessoa_01) << endl;
+    cout << projeto_01->adicionarRecurso(pessoa_01) << endl;
+    cout << projeto_01->adicionarRecurso(pessoa_02) << endl;
+    cout << projeto_01->getPessoas() << endl;
+    cout << projeto_01->getQuantidadeDePessoas() << endl;
+    cout << projeto_01->getDuracao() << endl;
+    cout << projeto_01->getCusto() << endl;
+    projeto_01->imprimir();
+    cout << "----------------      " << endl;
 
     return 0;
 }
