@@ -33,8 +33,8 @@ public:
 
 private:
     string nome;
-    Atividade** vetorAtividades = new Atividade*;
-    Pessoa** vetorPessoas = new Pessoa*;
+    Atividade* vetorAtividades[MAXIMO_ATIVIDADES];
+    Pessoa* vetorPessoas[MAXIMO_RECURSOS];
     int contadorPessoas = 0;
     int contadorAtividades = 0;
 
