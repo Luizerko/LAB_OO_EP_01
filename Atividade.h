@@ -31,7 +31,7 @@ private:
     string nome;
     int horasNecessarias;
     int contadorPessoas = 0;
-    Pessoa** vetorPessoas = new Pessoa*;
+    Pessoa* vetorPessoas[MAXIMO_RECURSOS];
 };
 
 #endif // ATIVIDADE_H
