@@ -16,7 +16,6 @@ int main()
     cout << pessoa_01->getCusto(22) << endl;
     pessoa_01->imprimir();
     cout << "----------------      " << endl;
-
     //Teste para atividades:
     Pessoa *pessoa_02 = new Pessoa("Camila", 25, 4);
     Atividade *atividade_01 = new Atividade("Leitura", 15);
@@ -31,7 +30,6 @@ int main()
     cout << atividade_01->getCusto() << endl;
     atividade_01->imprimir();
     cout << "----------------      " << endl;
-
     //Teste para projeto:
     Projeto *projeto_01 = new Projeto("Teste");
     Atividade *atividade_02 = new Atividade("Contas", 20);
@@ -62,12 +60,10 @@ int main()
     cin >> nome_projeto;
     Projeto* projeto_01 = new Projeto(nome_projeto);
 
-    int opcao, i, contador_pessoas = 0, contador_atividades = 0;
+    int opcao, i;
     string nome_pessoa, nome_atividade;
     int valor_por_hora, horas_diarias, horas_necessarias;
     char add_recurso;
-    Pessoa* pessoas[MAXIMO_RECURSOS];
-    Atividade* atividades[MAXIMO_ATIVIDADES];
     while(opcao != 0) {
         cout << "1 - Adicionar pessoa" << endl;
         cout << "2 - Adicionar atividade" << endl;
@@ -83,17 +79,7 @@ int main()
             cin >> valor_por_hora;
             cout << "Horas diarias: ";
             cin >> horas_diarias;
-            if(contador_pessoas < MAXIMO_RECURSOS) {
-                pessoas[contador_pessoas] = new Pessoa(nome_pessoa, valor_por_hora, horas_diarias);
-                if(projeto_01->adicionarRecurso(pessoas[contador_pessoas]) == 1) {
-                    projeto_01->adicionarRecurso(pessoas[contador_pessoas]) == 1;
-                    contador_pessoas++;
-                }
-                else {
-                    cout << "Nao eh possivel adicionar uma nova pessoa" << endl;
-                }
-            }
-            else {
+            if(projeto_01->adicionarRecurso(new Pessoa(nome_pessoa, valor_por_hora, horas_diarias)) != 1) {
                 cout << "Nao eh possivel adicionar uma nova pessoa" << endl;
             }
         }
@@ -103,28 +89,24 @@ int main()
             cin >> nome_atividade;
             cout << "Horas necessarias: ";
             cin >> horas_necessarias;
-            if(contador_atividades < MAXIMO_ATIVIDADES) {
-                atividades[contador_atividades] = new Atividade(nome_atividade, horas_necessarias);
-                projeto_01->adicionar(atividades[contador_atividades]);
-                add_recurso = 's';
+            add_recurso = 's';
+            if(projeto_01->adicionar(new Atividade(nome_atividade, horas_necessarias)) == 1) {
                 while(add_recurso != 'n') {
                     cout << "Deseja adicionar um recurso (s/n)? ";
                     cin >> add_recurso;
                     if(add_recurso == 's') {
-                        for(i = 1; i <= contador_pessoas; i++) {
-                            cout << i << " - " << pessoas[i-1]->getNome() << " - R$" << pessoas[i-1]->getValorPorHora() << " - " << pessoas[i-1]->getHorasDiarias() << "h por dia" << endl;
+                        for(i = 1; i <= projeto_01->getQuantidadeDePessoas(); i++) {
+                            cout << i << " - " << projeto_01->getPessoas()[i-1]->getNome() << " - R$" << projeto_01->getPessoas()[i-1]->getValorPorHora() << " - " << projeto_01->getPessoas()[i-1]->getHorasDiarias() << "h por dia" << endl;
                         }
                         cout << "Escolha uma pessoa ou 0 para cancelar: ";
                         cin >> i;
-                        if(atividades[contador_atividades]->adicionar(pessoas[i-1]) == 1 && i != 0) {
-                            atividades[contador_atividades]->adicionar(pessoas[i-1]);
-                        }
-                        else {
-                            cout << "Nao foi possivel adicionar a pessoa" << endl;
+                        if(i != 0) {
+                            if(projeto_01->getAtividades()[projeto_01->getQuantidadeDeAtividades()-1]->adicionar(projeto_01->getPessoas()[i-1]) != 1) {
+                                cout << "Nao foi possivel adicionar a pessoa" << endl;
+                            }
                         }
                     }
                 }
-                contador_atividades++;
             }
             else {
                 cout << "Nao eh possivel adicionar uma nova atividade" << endl;
