@@ -10,8 +10,7 @@ using namespace std;
 #define PROJETO_H
 
 
-class Projeto
-{
+class Projeto {
 public:
     Projeto(string nome);
     virtual ~Projeto();
