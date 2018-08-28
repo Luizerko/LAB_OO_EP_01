@@ -79,10 +79,5 @@ double Projeto::getCusto() {
 }
 
 void Projeto::imprimir() {
-    if (getDuracao() == 1) {
-        cout << getNome() << " - " << getDuracao() << "dia - R$" << getCusto() << endl;
-    }
-    else {
-        cout << getNome() << " - " << getDuracao() << "dias - R$" << getCusto() << endl;
-    }
+    cout << getNome() << " - " << getDuracao() << "dias - R$" << getCusto() << endl;
 }
